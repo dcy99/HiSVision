@@ -16,7 +16,6 @@ torch.set_grad_enabled(False)
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 print("[INFO] {}".format(device))
 
-# 图像数据处理
 transform = T.Compose([
     T.Resize(800),
     T.ToTensor(),
@@ -31,10 +30,6 @@ def plot_result(pil_img, prob, boxes, save_name=None, imshow=False, imwrite=Fals
     for p, (xmin, ymin, xmax, ymax) in zip(prob, boxes):
         cl = p.argmax()
         label_text = '{}: {}%'.format(LABEL[cl], round(p[cl] * 100, 2))
-
-
-        #print(xmin,xmax,ymin,ymax)
-
 
 
         cv2.rectangle(opencvImage, (int(xmin), int(ymin)), (int(xmax), int(ymax)), (255, 255, 0), 2)
@@ -52,8 +47,6 @@ def plot_result(pil_img, prob, boxes, save_name=None, imshow=False, imwrite=Fals
 
 
 
-
-# 将xywh转xyxy
 def box_cxcywh_to_xyxy(x):
     x_c, y_c, w, h = x.unbind(1)
     b = [(x_c - 0.5 * w), (y_c - 0.5 * h),
@@ -73,7 +66,7 @@ def load_model(model_path, args):
     model, _, _ = build_model(args)
     model.cuda()
     model.eval()
-    state_dict = torch.load(model_path, map_location='cuda:0')  # <-----------修改加载模型的路径
+    state_dict = torch.load(model_path, map_location='cuda:0') 
     model.load_state_dict(state_dict["model"])
     model.to(device)
     print("load model sucess")
@@ -89,8 +82,7 @@ def detect(im, model, transform, prob_threshold):
     img = img.to(device)
     start = time.time()
     outputs = model(img)
-    # keep only predictions with 0.7+ confidence
-    #print(outputs['pred_logits'].softmax(-1)[0, :, :-1])
+
     probas = outputs['pred_logits'].softmax(-1)[0, :, :-1]
     keep = probas.max(-1).values > prob_threshold
 
@@ -98,8 +90,7 @@ def detect(im, model, transform, prob_threshold):
     keep = keep.cpu().detach().numpy()
 
     # ------------------------------------------------
-    #keep_max = np.max(probas.max(-1))   #只保留一个框
-    keep_max = np.sort(probas.max(-1))[-3] #保留3个框
+    keep_max = np.sort(probas.max(-1))[-3] 
     if keep_max > prob_threshold:
         keep = probas.max(-1) >= keep_max
     else:
@@ -145,7 +136,6 @@ if __name__ == "__main__":
     img_path = main_args.img
     output_path = main_args.output
 
-    # 加载模型
     dfdetr = load_model(model_path, main_args)
     resolution = 50000
     img_load_path = img_path
@@ -157,7 +147,7 @@ if __name__ == "__main__":
     threshold = 0.85
 
     for file in files:
-        img_path = os.path.join(img_load_path, file)  # <--修改为待预测图片所在文件夹路径
+        img_path = os.path.join(img_load_path, file) 
         im = Image.open(img_path)
         w,h = im.size
         if w < 20 or h < 20:
