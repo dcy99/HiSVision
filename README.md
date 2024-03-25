@@ -7,11 +7,11 @@ https://www.dropbox.com/scl/fo/9gbfn6gmawsx4gfoamlo6/h?rlkey=7atqw7edsl4f25q3oc9
 
 # Example usage
 ## 1. plot contact matrix image 
-plot inter-chromosomal contact matrix image, the image will saved in `{cell_name}_inter_image_50000` :
+plot inter-chromosomal contact matrix image, the image will saved in `./{cell_name}_inter_image_50000` :
 ```
 python plot_inter_img.py --cool_file /path_to_mcool_file
 ```
-plot intra-chromosomal contact matrix image, the image will saved in `{cell_name}_intra_image_50000`:
+plot intra-chromosomal contact matrix image, the image will saved in `./{cell_name}_intra_image_50000`:
 ```
 python plot_intra_img.py --cool_file /path_to_mcool_file
 ```
