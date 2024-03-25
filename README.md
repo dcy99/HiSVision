@@ -26,12 +26,25 @@ Intra:
 python find_candicate_region.py --img /path_to_intra_contact_matrix_image --model /path_to_pre-trained_model --output /output_path
 ```
 
-Then determine the SV breakpoint:
+Then identify the SV breakpoints and save the sub-matrix around the breakpoints at `./{cell_name}_sv_txt_inter` and `./{cell_name}_sv_txt_intra`.
+Inter:
+```
+python inter_find_breakpoint.py --cool_file /path_to_mcool_file --candicate_inter_list /path_to_inter_candicate_SV_file
+```
+and Intra:
+```
+python intra_find_breakpoint.py --cool_file /path_to_mcool_file --candicate_intra_list /path_to_intra_candicate_SV_file
+```
+Finally, filtering and categorizing candidate SVs:
+Inter:
+```
+python predict.py --model ./lstm_saved_model/lstm_CLN.pth  --candicate /path_to_{cell_name}_sv_txt_inter --output /ouput_path
+```
+and Intra:
+```
+python predict.py --model ./lstm_saved_model/lstm_CLN.pth  --candicate /path_to_{cell_name}_sv_txt_intra --output /ouput_path
+```
 
-```
-python inter_find_breakpoint.py --cool_file /path_to_mcool_file --candicate_inter_list /path_to_candicate_SV_region_file
-```
-and 
-```
-python intra_find_breakpoint.py --cool_file /path_to_mcool_file --candicate_intra_list /path_to_candicate_SV_region_file
-```
+The final SV list will be saved in the `/output_path/Inter_SV_list.txt` and `/output_path/Intra_SV_list.txt`
+
+
