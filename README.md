@@ -7,3 +7,6 @@ https://www.dropbox.com/scl/fo/9gbfn6gmawsx4gfoamlo6/h?rlkey=7atqw7edsl4f25q3oc9
 
 # Example usage
 ## 1. plot contact matrix image
+```
+python xxx.py
+```
