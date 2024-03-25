@@ -7,11 +7,31 @@ https://www.dropbox.com/scl/fo/9gbfn6gmawsx4gfoamlo6/h?rlkey=7atqw7edsl4f25q3oc9
 
 # Example usage
 ## 1. plot contact matrix image
-plot inter-chromosomal contact matrix img:
+plot inter-chromosomal contact matrix image:
 ```
 python plot_inter_img.py --cool_file /path_to_mcool_file
 ```
-plot intra-chromosomal contact matrix img:
+plot intra-chromosomal contact matrix image:
 ```
 python plot_intra_img.py --cool_file /path_to_mcool_file
+```
+## 2. SV calling by HiSVision
+First identify candidate SVs from the contact matrix image, the image will saved in `/output_path/candicate_SV_region/candicate_inter.txt` and `/output_path/candicate_SV_region/candicate_intra.txt`
+Inter:
+```
+python find_candicate_region.py --img /path_to_inter_contact_matrix_image --model /path_to_pre-trained_model --output /output_path
+```
+Intra:
+```
+python find_candicate_region.py --img /path_to_intra_contact_matrix_image --model /path_to_pre-trained_model --output /output_path
+```
+
+Then determine the SV breakpoint:
+
+```
+python inter_find_breakpoint.py --cool_file /path_to_mcool_file --candicate_inter_list /path_to_candicate_SV_region_file
+```
+and 
+```
+python intra_find_breakpoint.py --cool_file /path_to_mcool_file --candicate_intra_list /path_to_candicate_SV_region_file
 ```
