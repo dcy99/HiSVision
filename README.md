@@ -6,12 +6,12 @@ The `KTS_checkpoint.pth` and `lstm_KTS.pth` is trained by HelaS3, Caki2, LNCaP a
 https://www.dropbox.com/scl/fo/9gbfn6gmawsx4gfoamlo6/h?rlkey=7atqw7edsl4f25q3oc9iuhqhh&dl=0
 
 # Example usage
-## 1. plot contact matrix image , the image will saved in `{cell_name}_inter_image_50000` and `{cell_name}_intra_image_50000`
-plot inter-chromosomal contact matrix image:
+## 1. plot contact matrix image 
+plot inter-chromosomal contact matrix image, the image will saved in `{cell_name}_inter_image_50000` :
 ```
 python plot_inter_img.py --cool_file /path_to_mcool_file
 ```
-plot intra-chromosomal contact matrix image:
+plot intra-chromosomal contact matrix image, the image will saved in `{cell_name}_intra_image_50000`:
 ```
 python plot_intra_img.py --cool_file /path_to_mcool_file
 ```
