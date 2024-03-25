@@ -17,30 +17,30 @@ python plot_intra_img.py --cool_file /path_to_mcool_file
 ```
 ## 2. SV calling by HiSVision
 First identify candidate SVs from the contact matrix image, the image will saved in `/output_path/candicate_SV_region/candicate_inter.txt` and `/output_path/candicate_SV_region/candicate_intra.txt`
-Inter:
+  Inter:
 ```
 python find_candicate_region.py --img /path_to_inter_contact_matrix_image --model /path_to_pre-trained_model --output /output_path
 ```
-Intra:
+and intra:
 ```
 python find_candicate_region.py --img /path_to_intra_contact_matrix_image --model /path_to_pre-trained_model --output /output_path
 ```
 
-Then identify the SV breakpoints and save the sub-matrix around the breakpoints at `./{cell_name}_sv_txt_inter` and `./{cell_name}_sv_txt_intra`.
-Inter:
+Then identify the SV breakpoints and save the sub-matrix around the breakpoints at `./{cell_name}_sv_txt_inter` and `./{cell_name}_sv_txt_intra`. 
+  Inter:
 ```
 python inter_find_breakpoint.py --cool_file /path_to_mcool_file --candicate_inter_list /path_to_inter_candicate_SV_file
 ```
-and Intra:
+and intra:
 ```
 python intra_find_breakpoint.py --cool_file /path_to_mcool_file --candicate_intra_list /path_to_intra_candicate_SV_file
 ```
 Finally, filtering and categorizing candidate SVs:
-Inter:
+  Inter:
 ```
 python predict.py --model ./lstm_saved_model/lstm_CLN.pth  --candicate /path_to_{cell_name}_sv_txt_inter --output /ouput_path
 ```
-and Intra:
+and intra:
 ```
 python predict.py --model ./lstm_saved_model/lstm_CLN.pth  --candicate /path_to_{cell_name}_sv_txt_intra --output /ouput_path
 ```
