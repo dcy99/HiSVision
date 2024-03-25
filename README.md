@@ -1,6 +1,9 @@
 # HiSVision
 a method for detecting large-scale structural variations based on Hi-C data and detection transformer
 
+# Requirements
+* python3.9, numpy, pandas, Matplotlib, cooler, seaborn
+
 # Download the pre-trained model
 The `KTS_checkpoint.pth` and `lstm_KTS.pth` is trained by HelaS3, Caki2, LNCaP and NCI-H460 cell lines, and the `CLN_checkpoint.pth` and `lstm_CLN.pth` is trained by HelaS3, K562, T47D and SK-N-MC. You can download the pre-trained model through the following link:
 https://www.dropbox.com/scl/fo/9gbfn6gmawsx4gfoamlo6/h?rlkey=7atqw7edsl4f25q3oc9iuhqhh&dl=0
